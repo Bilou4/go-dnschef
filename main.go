@@ -197,7 +197,8 @@ func main() {
 				slog.Info("Proxying request for", slog.String("domain", q.Name), slog.String("type", dns.TypeToString[q.Qtype]))
 				response, err = proxyRequest(m, *nameserver)
 				if err != nil {
-					slog.Error("Error proxying the request", slog.String("err", err.Error()))
+					slog.Error("Error proxying the request", slog.String("err", err.Error()), slog.String("domain", q.Name))
+					return
 				}
 			}
 		}
